@@ -1,0 +1,135 @@
+
+<div class='w-full flex bg-[#58D5D3]/20'>
+    <div class='w-1/5'></div>
+    <div class='w-3/5 h-[100vh] bg-cyan-50 shadow-md whitespace-nowrap overflow-y-auto'>
+        <div class='flex items-center border-b border-slate-950'>
+            <div>
+                <img src="assets/Logo.png" class='h-[8rem]' />
+            </div>
+            <div class='tracking-widest text-semibold text-2xl'>
+                Vínculo de Habilidade
+            </div>
+        </div>
+
+        <div class='py-4 px-4 shadow-md pb-4 bg-white'>
+            <form (ngSubmit)="onSubmit()">
+                <div class="space-y-12 sm:space-y-16">
+                    <div>
+                        <h2 class="text-base font-semibold leading-7 text-gray-900">Vincular Habilidades</h2>
+                        <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-600">
+                            Essas informações abaixo são necessárias para vincular habilidades aos candidatos.
+                        </p>
+
+                        <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                <label for="fullname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
+                                    Candidato
+                                </label>
+                                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[#58D5D3] sm:max-w-md">
+                                      <select
+                                        [(ngModel)]="selectedCandidateId"
+                                        name="candidateId"
+                                        id="candidateId"
+                                        class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-[#58D5D3] sm:text-sm sm:leading-6"
+                                    >
+                                        <option [ngValue]="null">Selecione um candidato</option>
+                                        <option *ngFor="let candidate of candidates" [ngValue]="candidate.id">
+                                            {{ candidate.fullName }}
+                                        </option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                              <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                <label for="fullname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
+                                    Habilidade
+                                </label>
+                                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[#58D5D3] sm:max-w-md">
+                                      <select
+                                        [(ngModel)]="selectedSkillId"
+                                        name="skillId"
+                                        id="skillId"
+                                        class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-[#58D5D3] sm:text-sm sm:leading-6"
+                                    >
+                                        <option [ngValue]="null">Selecione uma habilidade</option>
+                                        <option *ngFor="let skill of skills" [ngValue]="skill.id">
+                                            {{ skill.name }}
+                                        </option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                <label class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">
+                                    Nível
+                                </label>
+                                <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                    <div class="space-y-3">
+                                        <div class="flex items-center">
+                                            <input
+                                                id="iniciante"
+                                                name="level"
+                                                type="radio"
+                                                [(ngModel)]="selectedLevel"
+                                                value="Iniciante"
+                                                class="h-4 w-4 border-gray-300 text-[#58D5D3] focus:ring-[#58D5D3]"
+                                            >
+                                            <label for="iniciante" class="ml-3 block text-sm font-medium leading-6 text-gray-900">
+                                                Iniciante
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input
+                                                id="intermediario"
+                                                name="level"
+                                                type="radio"
+                                                [(ngModel)]="selectedLevel"
+                                                value="Intermediario"
+                                                class="h-4 w-4 border-gray-300 text-[#58D5D3] focus:ring-[#58D5D3]"
+                                            >
+                                            <label for="intermediario" class="ml-3 block text-sm font-medium leading-6 text-gray-900">
+                                                Intermediário
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input
+                                                id="avancado"
+                                                name="level"
+                                                type="radio"
+                                                [(ngModel)]="selectedLevel"
+                                                value="Avancado"
+                                                class="h-4 w-4 border-gray-300 text-[#58D5D3] focus:ring-[#58D5D3]"
+                                            >
+                                            <label for="avancado" class="ml-3 block text-sm font-medium leading-6 text-gray-900">
+                                                Avançado
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center justify-end gap-x-6">
+                    <button type="button" [routerLink]="['/skills/create']" class="text-sm font-semibold leading-6 text-gray-900">
+                        Cancelar
+                    </button>
+                    <button
+                        type="submit"
+                        class="inline-flex justify-center rounded-md bg-[#58D5D3] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#58D5D3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#58D5D3]"
+                    >
+                        Vincular
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class='w-1/5'></div>
+</div>
+
+
+
+

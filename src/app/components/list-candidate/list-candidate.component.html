@@ -1,0 +1,88 @@
+<div class="w-full flex bg-[#58D5D3]/20">
+  <div class="w-1/5"></div>
+  <div class="w-3/5 h-[100vh] bg-cyan-50 shadow-md whitespace-nowrap overflow-y-auto">
+    
+    <div class="flex items-center border-b border-slate-950">
+      <div>
+        <img src="assets/Logo.png" class="h-[8rem]" alt=""/>
+      </div>
+      <div class="tracking-widest text-semibold text-2xl">
+        Gestão de Candidatos e Habilidades
+      </div>
+    </div>
+
+    <div class="bg-white py-4">
+      <div class="px-4 sm:px-6 lg:px-8 shadow-sm">
+        <div class="sm:flex sm:items-center">
+          <div class="sm:flex-auto">
+            <h1 class="text-base font-semibold leading-6 text-gray-900">Candidatos</h1>
+            <p class="mt-2 text-sm text-gray-700">
+              Uma lista de todos os candidatos contendo seus nomes, emails e data de criação.
+            </p>
+          </div>
+          <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+             <a [routerLink]="['/candidates/create']">
+              <button
+                type="button"
+                class="block rounded-md bg-[#58D5D3] hover:bg-[#58D5D3]/70 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#58D5D3]"
+              >
+                Adicionar candidato
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-8 flow-root">
+          <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle">
+              <table class="min-w-full border-separate border-spacing-0">
+                <thead>
+                  <tr>
+                    <th class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Nome</th>
+                    <th class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Email</th>
+                    <th class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Data de Criação</th>
+                    <th class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 px-3 text-left text-sm font-semibold text-gray-900"></th>
+                    <th class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 px-3 text-left text-sm font-semibold text-gray-900"></th>
+                    <th class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 px-3 text-left text-sm font-semibold text-gray-900"></th>
+                    <th class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-4" colspan="2">
+                      <span class="sr-only">Actions</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-slate-50">
+                  <tr *ngFor="let candidates of data">
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">{{candidates.fullName}}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{candidates.email}}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{candidates.createdAt}}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
+                    <td class="relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium">
+                      <a [routerLink]="['/assign-skills/create']" class="text-[#58D5D3] hover:text-[#58D5D3]/70 hover:bg-black/10 hover:rounded-full p-2">
+                        Vincular
+                      </a>
+                    </td>
+                    <td class="relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium">
+                      <a [routerLink]="['/candidates', candidates.id, 'skills']" class="text-[#58D5D3] hover:text-[#58D5D3]/70 hover:bg-black/10 hover:rounded-full p-2">
+                        Ver
+                      </a>
+                    </td>
+                    <td class="relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium">
+                      <a [routerLink]="['/candidates/edit', candidates.id]" class="text-[#58D5D3] hover:text-[#58D5D3]/70 hover:bg-black/10 hover:rounded-full p-2">
+                        Editar
+                      </a>
+                    </td>
+                    <td class="relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium">
+                      <a href="#" (click)="confirmDelete(candidates.id); $event.preventDefault()" class="text-[#58D5D3] hover:text-[#58D5D3]/70 hover:bg-black/10 hover:rounded-full p-2">
+                        Excluir
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-1/5"></div>
+</div>
