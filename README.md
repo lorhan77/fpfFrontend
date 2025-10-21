@@ -1,7 +1,5 @@
 # Frontend
 
-# Frontend
-
 ## Pré-requisitos
 
 Antes de iniciar, certifique-se de ter instalado:
