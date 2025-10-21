@@ -1,11 +1,9 @@
 # Frontend
 
-# Frontend
-
 ## Pré-requisitos
 
 Antes de iniciar, certifique-se de ter instalado:
-- Node.js (versão 16 ou superior)
+- Node.js (versão 22 ou superior)
 - npm ou yarn
 - Angular CLI (opcional, mas recomendado)
 
