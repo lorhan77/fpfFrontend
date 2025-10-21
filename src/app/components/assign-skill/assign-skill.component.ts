@@ -17,6 +17,12 @@ interface ISkill {
   candidateSkills: any[];
 }
 
+interface ISkillAssignment {
+  skillId: number;
+  skillName: string;
+  level: string;
+}
+
 @Component({
   selector: 'app-assign-skill',
   standalone: true,
@@ -33,9 +39,42 @@ export class AssignSkillComponent {
 
   selectedLevel: string = '';
 
+  selectedSkills: ISkillAssignment[] = [];
+
   ngOnInit() {
      this.loadCandidates();
      this.loadSkills();
+  }
+
+  addSkill() {
+    if (!this.selectedSkillId || !this.selectedLevel) {
+      alert('Por favor, selecione uma habilidade e um nível');
+      return;
+    }
+
+  
+    const skillExists = this.selectedSkills.find(s => s.skillId === this.selectedSkillId);
+    if (skillExists) {
+      alert('Esta habilidade já foi adicionada');
+      return;
+    }
+
+    const skill = this.skills.find(s => s.id === this.selectedSkillId);
+    if (skill) {
+      this.selectedSkills.push({
+        skillId: skill.id,
+        skillName: skill.name,
+        level: this.selectedLevel
+      });
+
+      
+      this.selectedSkillId = null;
+      this.selectedLevel = '';
+    }
+  }
+
+  removeSkill(index: number) {
+    this.selectedSkills.splice(index, 1);
   }
 
   async loadCandidates() {
@@ -63,18 +102,20 @@ export class AssignSkillComponent {
 
   async onSubmit() {
     try {
-      if (!this.selectedCandidateId || !this.selectedSkillId || !this.selectedLevel) {
-        console.error('Por favor, preencha todos os campos');
-        alert('Por favor, selecione um candidato, uma habilidade e um nível');
+      if (!this.selectedCandidateId) {
+        alert('Por favor, selecione um candidato');
         return;
       }
 
-      const payload = [
-        {
-          SkillId: this.selectedSkillId,
-          Level: this.selectedLevel
-        }
-      ];
+      if (this.selectedSkills.length === 0) {
+        alert('Por favor, adicione pelo menos uma habilidade');
+        return;
+      }
+
+      const payload = this.selectedSkills.map(skill => ({
+        SkillId: skill.skillId,
+        Level: skill.level
+      }));
 
       const response = await axios.post(
         `https://localhost:7260/api/Candidates/${this.selectedCandidateId}/Skills`,
@@ -85,10 +126,11 @@ export class AssignSkillComponent {
         console.log('Sucesso:', response.data.mensagem);
         alert(response.data.mensagem);
         
-        // Limpar formulário apenas em caso de sucesso
+        // Limpar formulário
         this.selectedCandidateId = null;
         this.selectedSkillId = null;
         this.selectedLevel = '';
+        this.selectedSkills = [];
       } else {
         console.error('Erro:', response.data.mensagem);
         alert(`Erro: ${response.data.mensagem}`);
@@ -96,7 +138,6 @@ export class AssignSkillComponent {
       
     } catch (error: any) {
       console.error('Erro ao vincular habilidade:', error);
-      
       
       if (error.response && error.response.data && error.response.data.mensagem) {
         alert(`Erro: ${error.response.data.mensagem}`);
