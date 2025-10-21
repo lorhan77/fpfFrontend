@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import axios from 'axios';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 interface ICandidate {
   id: number;
@@ -13,7 +14,7 @@ interface ICandidate {
 @Component({
   selector: 'app-list-candidate',
   standalone: true,
-  imports: [CommonModule, RouterLink, CommonModule],
+  imports: [CommonModule, RouterLink, CommonModule, NavbarComponent],
   templateUrl: './list-candidate.component.html'
 })
 export class ListCandidateComponent {

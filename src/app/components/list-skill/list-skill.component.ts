@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import axios from 'axios';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 interface ISkill {
  name: string;
@@ -10,7 +11,7 @@ interface ISkill {
 @Component({
   selector: 'app-list-skill',
   standalone: true,
-  imports: [CommonModule, RouterLink, CommonModule],
+  imports: [CommonModule, RouterLink, CommonModule, NavbarComponent],
   templateUrl: './list-skill.component.html',
   styleUrl: './list-skill.component.css'
 })

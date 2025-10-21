@@ -7,7 +7,7 @@ import axios from 'axios';
 @Component({
   selector: 'app-list-candidate-skill',
   standalone: true,
-  imports: [CommonModule, FormsModule, ],
+  imports: [CommonModule, FormsModule, RouterLink ],
   templateUrl: './list-candidate-skill.component.html',
   styleUrl: './list-candidate-skill.component.css'
 })

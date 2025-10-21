@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet, ActivatedRoute, Router, RouterLink } from '@angular/router';
 import axios from 'axios';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 interface ICandidate {
   id: number;
@@ -26,7 +27,7 @@ interface ISkillAssignment {
 @Component({
   selector: 'app-assign-skill',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent],
   templateUrl: './assign-skill.component.html',
   styleUrl: './assign-skill.component.css'
 })
